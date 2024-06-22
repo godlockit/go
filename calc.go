@@ -71,7 +71,9 @@ func calculate(a, op, b string) (interface{}, error) {
   if result <= 0 {
    return nil, fmt.Errorf("результат должен быть положительным числом или ноль")
   }
-  return convertToRoman(result), nil
+  if result <= 10{
+	return convertToRoman(result), nil
+  }
  }
 
  return result, nil
@@ -87,14 +89,14 @@ func main() {
  parts := strings.Split(input, " ")
  if len(parts) != 3 {
   fmt.Println("Неверный формат математической операции")
-  os.Exit(1)
+  os.Exit(0)
  }
 
  a, op, b := parts[0], parts[1], parts[2]
  result, err := calculate(a, op, b)
  if err != nil {
   fmt.Println("Ошибка расчета:", err)
-  os.Exit(1)
+  os.Exit(0)
  }
 
  fmt.Println("Результат:", result)
