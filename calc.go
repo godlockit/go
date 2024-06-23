@@ -17,13 +17,17 @@ func convertToArabic(input string, arabicNumbers map[string]int, romanNumbers ma
 }
 
 func convertToRoman(num int) string {
- if num <= 0 || num > 10 {
-  return ""
+  if num <= 0 || num > 100 {
+   return ""
+  }
+ 
+  thousands := []string{"", "M", "MM", "MMM"}
+  hundreds := []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
+  tens := []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
+  ones := []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
+ 
+  return thousands[num/1000] + hundreds[(num%1000)/100] + tens[(num%100)/10] + ones[num%10]
  }
-
- romanNumbers := []string{"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"}
- return romanNumbers[num-1]
-}
 
 func calculate(a, op, b string) (interface{}, error) {
  arabicNumbers := map[string]int{
